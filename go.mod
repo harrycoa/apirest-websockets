@@ -1,6 +1,6 @@
 module github.com/harrycoa/apirest-websockets.git
 
-go 1.14
+go 1.17
 
 require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
