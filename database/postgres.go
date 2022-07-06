@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/harrycoa/apirest-websockets.git/models"
+	_ "github.com/lib/pq"
 )
 
 type PostgresRepository struct {
@@ -29,7 +30,7 @@ func (repo *PostgresRepository) InsertUser(ctx context.Context, user *models.Use
 }
 
 // Obtener usuario por id
-func (repo *PostgresRepository) GetUserById(ctx context.Context, id int64) (*models.User, error) {
+func (repo *PostgresRepository) GetUserById(ctx context.Context, id string) (*models.User, error) {
 	rows, err := repo.db.QueryContext(ctx, "SELECT id, email FROM users WHERE id = $1", id)
 	defer func() {
 		err = rows.Close()
