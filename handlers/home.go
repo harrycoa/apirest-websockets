@@ -18,7 +18,7 @@ func HomeHandler(s server.Server) http.HandlerFunc {
 		w.WriteHeader(http.StatusOK)
 		// Creamos la respuesta
 		json.NewEncoder(w).Encode(HomeResponse{
-			Message: "Welcome!",
+			Message: "Api go version 1.0.0",
 			Status:  true,
 		})
 

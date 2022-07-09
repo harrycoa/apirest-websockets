@@ -38,6 +38,7 @@ func main() {
 
 func BindRoutes(s server.Server, r *mux.Router) {
 	// Primer endpoint
-	r.HandleFunc("/", handlers.HomeHandler(s)).Methods(http.MethodGet)
+	r.HandleFunc("/version", handlers.HomeHandler(s)).Methods(http.MethodGet)
+	r.HandleFunc("/signup", handlers.SignUpHandler(s)).Methods(http.MethodPost)
 
 }
