@@ -8,6 +8,7 @@ import (
 
 	"github.com/gorilla/mux"
 	"github.com/harrycoa/apirest-websockets.git/handlers"
+	"github.com/harrycoa/apirest-websockets.git/middleware"
 	"github.com/harrycoa/apirest-websockets.git/server"
 	"github.com/joho/godotenv"
 )
@@ -37,8 +38,12 @@ func main() {
 }
 
 func BindRoutes(s server.Server, r *mux.Router) {
+	// adiciona el middleware de autenticacion
+	r.Use(middleware.CheckAuthMiddleware(s))
+
 	// Primer endpoint
 	r.HandleFunc("/version", handlers.HomeHandler(s)).Methods(http.MethodGet)
 	r.HandleFunc("/signup", handlers.SignUpHandler(s)).Methods(http.MethodPost)
-
+	r.HandleFunc("/login", handlers.LoginHandler(s)).Methods(http.MethodPost)
+	r.HandleFunc("/me", handlers.MeHandler(s)).Methods(http.MethodGet)
 }
