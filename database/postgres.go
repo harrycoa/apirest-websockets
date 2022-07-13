@@ -26,7 +26,6 @@ func NewPostgresRepository(url string) (*PostgresRepository, error) {
 func (repo *PostgresRepository) InsertUser(ctx context.Context, user *models.User) error {
 	_, err := repo.db.ExecContext(ctx, "INSERT INTO users (id,email, password) VALUES ($1, $2, $3)", user.ID, user.Email, user.Password)
 	return err
-
 }
 
 // Obtener usuario por id
@@ -77,4 +76,10 @@ func (repo *PostgresRepository) GetUserByEmail(ctx context.Context, email string
 
 func (repo *PostgresRepository) Close() error {
 	return repo.db.Close()
+}
+
+// Isertar Post en la base de datos
+func (repo *PostgresRepository) InsertPost(ctx context.Context, post *models.Post) error {
+	_, err := repo.db.ExecContext(ctx, "INSERT INTO posts (id,postcontent, user_id) VALUES ($1, $2, $3)", post.Id, post.PostContent, post.UserId)
+	return err
 }
